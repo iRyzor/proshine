@@ -16,9 +16,9 @@ namespace PROProtocol
             switch (server)
             {
                 case GameServer.Silver:
-                    return new IPEndPoint(IPAddress.Parse("185.212.131.104"), 800);
+                    return new IPEndPoint(IPAddress.Parse("103.136.40.250"), 800);
                 case GameServer.Gold:
-                    return new IPEndPoint(IPAddress.Parse("185.212.131.104"), 801);
+                    return new IPEndPoint(IPAddress.Parse("185.232.52.55"), 801);
             }
             return null;
         }
