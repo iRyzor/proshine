@@ -108,7 +108,7 @@ namespace PROProtocol
         public event Action ActivePokemonChanged;
         public event Action OpponentChanged;
         
-        private const string Version = "Xmas19";
+        private const string Version = "Easter20";
 
         private GameConnection _connection;
         private DateTime _lastMovement;
@@ -1414,7 +1414,14 @@ namespace PROProtocol
         private void OnGuildData(string[] data)
         {
             //y|.|Guild name|999(id)|guild description|total members format: (total/max)|Leader Name|.\
-            GuildId = int.Parse(data[1].Split('|')[1]);
+            try
+            {
+                GuildId = int.Parse(data[1].Split('|')[1]);
+            }
+            catch (Exception _)
+            {
+                Console.WriteLine($"PACKET ERROR {string.Join(" ", data)}");
+            }
         }
 
         private void OnUpdateTime(string[] data)
