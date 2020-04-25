@@ -24,7 +24,7 @@ namespace PROShine.Views
         private string _lastActiveName;
         private string _lastOpponentName;
         private Regex _nameCleaner = new Regex("'| |\\."); // Removes invalid characters
-        private const string _spriteDatabasePrefix = "http://pokestadium.com/sprites/xy";
+        private const string _spriteDatabasePrefix = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon";
 
         public BattleView(BotClient bot, MainWindow parent)
         {
@@ -59,9 +59,9 @@ namespace PROShine.Views
                             _lastOpponentName = opponent;
                             string sprite = _nameCleaner.Replace(opponent.ToLowerInvariant(), "");
                             if (_bot.Game.ActiveBattle.IsShiny)
-                                sprite = $"{_spriteDatabasePrefix}/shiny/{sprite}.gif";
+                                sprite = $"{_spriteDatabasePrefix}/shiny/{_bot.Game.ActiveBattle.OpponentId}.png";
                             else
-                                sprite = $"{_spriteDatabasePrefix}/{sprite}.gif";
+                                sprite = $"{_spriteDatabasePrefix}/{_bot.Game.ActiveBattle.OpponentId}.png";
                             AnimationBehavior.SetSourceUri(OpponentGraphic, new Uri(sprite));
                         }
 
@@ -110,9 +110,9 @@ namespace PROShine.Views
                             _lastActiveName = active.Name;
                             string sprite = _nameCleaner.Replace(active.Name.ToLowerInvariant(), "");
                             if (active.IsShiny)
-                                sprite = $"{_spriteDatabasePrefix}/shiny/back/{sprite}.gif";
+                                sprite = $"{_spriteDatabasePrefix}/shiny/back/{active.Id}.png";
                             else
-                                sprite = $"{_spriteDatabasePrefix}/back/{sprite}.gif";
+                                sprite = $"{_spriteDatabasePrefix}/back/{active.Id}.png";
                             AnimationBehavior.SetSourceUri(PlayerGraphic, new Uri(sprite));
                         }
 
